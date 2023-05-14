@@ -1,6 +1,8 @@
+import { useEffect } from "react";
+
 import styled from "@emotion/styled";
 import { FormClose } from "grommet-icons";
-import { useEffect } from "react";
+
 import { maxWidth, mediaQuery } from "../theme";
 import { colors } from "../theme/colors";
 

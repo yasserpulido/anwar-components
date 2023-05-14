@@ -3,9 +3,9 @@ export const fontWeight = {
   extralight: 200,
   light: 300,
   regular: 400,
-  medium: 'normal',
+  medium: "normal",
   semibold: 600,
-  bold: 'bold',
+  bold: "bold",
   extrabold: 800,
   black: 900,
-}
+};

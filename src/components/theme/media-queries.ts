@@ -12,7 +12,7 @@ export const breakpoints = {
   large: 992,
   xlarge: 1200,
   xxlarge: 1400,
-}
+};
 
 export const mediaQuery = {
   small: `@media (min-width: ${breakpoints.small}px)`,
@@ -20,4 +20,4 @@ export const mediaQuery = {
   large: `@media (min-width: ${breakpoints.large}px)`,
   xlarge: `@media (min-width: ${breakpoints.xlarge}px)`,
   xxlarge: `@media (min-width: ${breakpoints.xxlarge}px)`,
-}
+};

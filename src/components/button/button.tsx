@@ -1,5 +1,3 @@
-import React from "react";
-
 import styled from "@emotion/styled";
 
 import { colors } from "../theme/colors";
@@ -114,5 +112,4 @@ const BaseButton = styled.button<BaseButtonProps>(({ variant, size }) => ({
         : colors.White,
   },
 }));
-
 export default Button;
