@@ -1,5 +1,27 @@
+import styled from "@emotion/styled";
+import { Navbar, maxWidth, mediaQuery } from "./design-system";
+
 function App() {
-  return <p>This is a package!</p>;
+  return (
+    <Container>
+      <Navbar
+        logo=""
+        items={[
+          { name: "Home", link: "" },
+          { name: "About", link: "" },
+          { name: "Contact", link: "" },
+        ]}
+      />
+    </Container>
+  );
 }
 
 export default App;
+
+const Container = styled.div({
+  [mediaQuery.large]: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    maxWidth: maxWidth.medium,
+  },
+});
