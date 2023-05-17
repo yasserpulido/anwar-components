@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
+
 import { Navbar, maxWidth, mediaQuery } from "./design-system";
 
 function App() {
   return (
     <Container>
       <Navbar
-        logo=""
+        title="My Website"
+        titleColor={"BlueDress"}
         items={[
           { name: "Home", link: "" },
           { name: "About", link: "" },

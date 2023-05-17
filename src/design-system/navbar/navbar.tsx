@@ -7,16 +7,16 @@ type Item = {
 };
 
 type Props = {
-  logo: string;
+  title: string;
+  titleColor?: keyof typeof colors;
   items: Item[];
 };
 
-export const Navbar = ({ logo, items }: Props) => {
+export const Navbar = ({ title, titleColor, items }: Props) => {
+  console.log(titleColor);
   return (
     <Nav>
-      <figure>
-        <img src={logo} alt="logo" />
-      </figure>
+      <Title color={titleColor}>{title}</Title>
       <NavList>
         {items.map((item) => (
           <NavItem key={item.name}>
@@ -32,7 +32,16 @@ const Nav = styled.nav(() => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "1.5rem 0",
+  padding: "1.5rem",
+}));
+
+type TitleProps = {
+  color: keyof typeof colors;
+};
+
+const Title = styled.span(({ color }: TitleProps) => ({
+  fontWeight: "bold",
+  color: colors[color],
 }));
 
 const NavList = styled.ul(() => ({
