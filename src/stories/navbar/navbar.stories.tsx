@@ -1,9 +1,6 @@
-import React from "react";
-
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Navbar } from "../../design-system";
-import { Theme } from "../../providers";
 
 const meta = {
   title: "Navbar",
