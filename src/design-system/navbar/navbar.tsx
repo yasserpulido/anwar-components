@@ -5,18 +5,24 @@ type Item = {
   name: string;
   link: string;
 };
+type Title = {
+  name: string;
+  color?: keyof typeof colors;
+  link: string;
+};
 
 type Props = {
-  title: string;
-  titleColor?: keyof typeof colors;
+  title: Title;
   items: Item[];
 };
 
-export const Navbar = ({ title, titleColor, items }: Props) => {
-  console.log(titleColor);
+export const Navbar = ({
+  title: { color = "Black", ...title },
+  items,
+}: Props) => {
   return (
     <Nav>
-      <Title color={titleColor}>{title}</Title>
+      <Title color={color}>{title.name}</Title>
       <NavList>
         {items.map((item) => (
           <NavItem key={item.name}>
