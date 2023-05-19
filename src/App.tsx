@@ -1,33 +1,19 @@
 import styled from "@emotion/styled";
 
-import { TimelineBase, maxWidth, mediaQuery } from "./design-system";
+import { Textfield, Workshop, maxWidth, mediaQuery } from "./design-system";
 
 function App() {
-  const description =
-    "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-
   return (
     <Container>
-      <TimelineBase.Timeline>
-        <TimelineBase.Item
-          title="Reservoir Dogs"
-          date="1993"
-          description={description}
-          readMoreLink="https://en.wikipedia.org/wiki/Reservoir_Dogs"
+      <Workshop>
+        <Textfield
+          label="Description"
+          name="description"
+          onChange={(e) => console.log(e)}
+          rows={2}
+          disabled={false}
         />
-        <TimelineBase.Item
-          title="Reservoir Dogs"
-          date="1993"
-          description={description}
-          readMoreLink="https://en.wikipedia.org/wiki/Reservoir_Dogs"
-        />
-        <TimelineBase.Item
-          title="Reservoir Dogs"
-          date="1993"
-          description={description}
-          readMoreLink="https://en.wikipedia.org/wiki/Reservoir_Dogs"
-        />
-      </TimelineBase.Timeline>
+      </Workshop>
     </Container>
   );
 }

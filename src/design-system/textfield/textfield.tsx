@@ -1,0 +1,104 @@
+import styled from "@emotion/styled";
+import { Alert } from "grommet-icons";
+import { colors, fontWeight } from "../theme";
+
+type Props = {
+  label: string;
+  name: string;
+  rows?: number;
+  value?: string | number;
+  errors?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange: (value: string) => void;
+};
+
+export const Textfield = ({
+  label,
+  name,
+  value,
+  rows = 2,
+  errors = "",
+  placeholder = "Type here",
+  disabled = false,
+  onChange,
+  ...props
+}: Props) => {
+  return (
+    <>
+      <FormGroup>
+        <Label htmlFor={name}>{label}:</Label>
+        <TextfieldBase
+          id={name}
+          name={name}
+          placeholder={placeholder}
+          onChange={(e) => onChange(e.currentTarget.value)}
+          value={value}
+          disabled={disabled}
+          errors={errors !== ""}
+          rows={rows >= 2 ? rows : 2}
+          {...props}
+        />
+      </FormGroup>
+      {errors !== "" && (
+        <Error>
+          <Alert size="small" />
+          {errors}
+        </Error>
+      )}
+    </>
+  );
+};
+
+const FormGroup = styled.div({
+  marginBottom: "0.2rem",
+});
+
+const Label = styled.label({
+  display: "block",
+  marginBottom: "0.2rem",
+});
+
+type FormGroupProps = {
+  errors: boolean;
+};
+
+const TextfieldBase = styled.textarea<FormGroupProps>(({ errors }) => ({
+  resize: "none",
+  border: `1px solid ${errors ? colors.PersianRed : colors.Black}`,
+  borderBottom: `2px solid ${errors ? colors.PersianRed : colors.Black}`,
+  borderRadius: 0,
+  fontSize: "1rem",
+  padding: "0",
+  paddingLeft: "0.2rem",
+  lineHeight: "1.5rem",
+  width: "100%",
+  fontWeight: fontWeight.regular,
+
+  ":focus": {
+    outline: `2px solid ${colors.DenimBlue}`,
+  },
+
+  "::placeholder": {
+    color: colors.FrenchGrey,
+    opacity: 1,
+  },
+
+  ":disabled": {
+    border: `1px solid ${colors.FrenchGrey}`,
+    borderBottom: `2px solid ${colors.FrenchGrey}`,
+    color: colors.FrenchGrey,
+  },
+}));
+
+const Error = styled.small({
+  color: colors.PersianRed,
+  display: "flex",
+  alignItems: "center",
+
+  "& svg, path": {
+    fontSize: "1rem",
+    marginRight: "0.4rem",
+    stroke: colors.PersianRed,
+  },
+});
