@@ -27,7 +27,7 @@ const ENTRIES = [
 ];
 
 type BaseObject = {
-  id: string;
+  id: number;
   [key: string]: unknown;
 };
 

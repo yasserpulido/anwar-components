@@ -17,55 +17,47 @@ type Props = {
   onChange: (value: string) => void;
 };
 
-const Input = React.forwardRef<HTMLInputElement, Props>(
-  (
-    {
-      label,
-      name,
-      value,
-      errors = "",
-      type = "text",
-      placeholder = "Type here",
-      disabled = false,
-      onChange,
-      ...props
-    },
-    ref
-  ) => {
-    const hasDate = value !== "";
+export const Input = ({
+  label,
+  name,
+  value,
+  errors = "",
+  type = "text",
+  placeholder = "Type here",
+  disabled = false,
+  onChange,
+  ...props
+}: Props) => {
+  const hasDate = value !== "";
 
-    return (
-      <Container>
-        <FormGroup>
-          <Label htmlFor={name}>{label}:</Label>
-          <InputBase
-            id={name}
-            name={name}
-            placeholder={placeholder}
-            type={type}
-            ref={ref}
-            onChange={(e) => onChange(e.currentTarget.value)}
-            value={value}
-            hasDate={hasDate}
-            disabled={disabled}
-            errors={errors !== ""}
-            {...props}
-          />
-        </FormGroup>
-        {errors !== "" && (
-          <Error>
+  return (
+    <div>
+      <FormGroup>
+        <Label htmlFor={name}>{label}:</Label>
+        <InputBase
+          id={name}
+          name={name}
+          placeholder={placeholder}
+          type={type}
+          onChange={(e) => onChange(e.currentTarget.value)}
+          value={value}
+          hasDate={hasDate}
+          disabled={disabled}
+          errors={errors !== ""}
+          {...props}
+        />
+      </FormGroup>
+      {errors !== "" && (
+        <Error>
+          <ErrorIcon>
             <Alert size="small" />
-            {errors}
-          </Error>
-        )}
-      </Container>
-    );
-  }
-);
-
-const Container = styled.div({
-  height: "4rem",
-});
+          </ErrorIcon>
+          <ErrorMessage>{errors}</ErrorMessage>
+        </Error>
+      )}
+    </div>
+  );
+};
 
 const FormGroup = styled.div({
   marginBottom: "0.2rem",
@@ -76,12 +68,12 @@ const Label = styled.label({
   marginBottom: "0.2rem",
 });
 
-type FormGroupProps = {
+type InputBaseProps = {
   hasDate: boolean;
   errors: boolean;
 };
 
-const InputBase = styled.input<FormGroupProps>(({ hasDate, errors }) => ({
+const InputBase = styled.input<InputBaseProps>(({ hasDate, errors }) => ({
   border: `1px solid ${errors ? colors.PersianRed : colors.Black}`,
   borderBottom: `2px solid ${errors ? colors.PersianRed : colors.Black}`,
   borderRadius: 0,
@@ -98,6 +90,7 @@ const InputBase = styled.input<FormGroupProps>(({ hasDate, errors }) => ({
   "::placeholder": {
     color: colors.FrenchGrey,
     opacity: 1,
+    fontSize: "0.8rem",
   },
 
   ":disabled": {
@@ -107,11 +100,12 @@ const InputBase = styled.input<FormGroupProps>(({ hasDate, errors }) => ({
   },
 }));
 
-const Error = styled.small({
-  color: colors.PersianRed,
+const Error = styled.div({
   display: "flex",
   alignItems: "center",
+});
 
+const ErrorIcon = styled.div({
   "& svg, path": {
     fontSize: "1rem",
     marginRight: "0.4rem",
@@ -119,4 +113,7 @@ const Error = styled.small({
   },
 });
 
-export default Input;
+const ErrorMessage = styled.span({
+  color: colors.PersianRed,
+  fontSize: "0.8rem",
+});

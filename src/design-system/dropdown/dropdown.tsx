@@ -40,7 +40,7 @@ export const Dropdown = ({
   };
 
   return (
-    <>
+    <div>
       <FormGroup>
         <Label htmlFor={name}>{label}:</Label>
         <Select
@@ -57,11 +57,13 @@ export const Dropdown = ({
       </FormGroup>
       {errors !== "" && (
         <Error>
-          <Alert size="small" />
-          {errors}
+          <ErrorIcon>
+            <Alert size="small" />
+          </ErrorIcon>
+          <ErrorMessage>{errors}</ErrorMessage>
         </Error>
       )}
-    </>
+    </div>
   );
 };
 
@@ -87,14 +89,20 @@ const Select = styled.select({
   background: colors.White,
 });
 
-const Error = styled.small({
-  color: colors.PersianRed,
+const Error = styled.div({
   display: "flex",
   alignItems: "center",
+});
 
+const ErrorIcon = styled.div({
   "& svg, path": {
     fontSize: "1rem",
     marginRight: "0.4rem",
     stroke: colors.PersianRed,
   },
+});
+
+const ErrorMessage = styled.span({
+  color: colors.PersianRed,
+  fontSize: "0.8rem",
 });

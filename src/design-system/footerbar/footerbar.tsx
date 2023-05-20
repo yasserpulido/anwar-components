@@ -15,4 +15,5 @@ export const Footerbar = ({ text }: Props) => {
 const Footer = styled.footer({
   textAlign: "center",
   padding: "1rem",
+  marginTop: "auto",
 });

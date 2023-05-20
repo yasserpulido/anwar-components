@@ -25,7 +25,7 @@ export const Textfield = ({
   ...props
 }: Props) => {
   return (
-    <>
+    <div>
       <FormGroup>
         <Label htmlFor={name}>{label}:</Label>
         <TextfieldBase
@@ -42,11 +42,13 @@ export const Textfield = ({
       </FormGroup>
       {errors !== "" && (
         <Error>
-          <Alert size="small" />
-          {errors}
+          <ErrorIcon>
+            <Alert size="small" />
+          </ErrorIcon>
+          <ErrorMessage>{errors}</ErrorMessage>
         </Error>
       )}
-    </>
+    </div>
   );
 };
 
@@ -82,6 +84,7 @@ const TextfieldBase = styled.textarea<FormGroupProps>(({ errors }) => ({
   "::placeholder": {
     color: colors.FrenchGrey,
     opacity: 1,
+    fontSize: "0.8rem",
   },
 
   ":disabled": {
@@ -91,14 +94,20 @@ const TextfieldBase = styled.textarea<FormGroupProps>(({ errors }) => ({
   },
 }));
 
-const Error = styled.small({
-  color: colors.PersianRed,
+const Error = styled.div({
   display: "flex",
   alignItems: "center",
+});
 
+const ErrorIcon = styled.div({
   "& svg, path": {
     fontSize: "1rem",
     marginRight: "0.4rem",
     stroke: colors.PersianRed,
   },
+});
+
+const ErrorMessage = styled.span({
+  color: colors.PersianRed,
+  fontSize: "0.8rem",
 });
