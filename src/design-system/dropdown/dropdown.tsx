@@ -1,10 +1,12 @@
+import { ChangeEvent, Ref, forwardRef, useEffect, useState } from "react";
+
 import styled from "@emotion/styled";
-import { colors, fontWeight } from "../theme";
 import { Alert } from "grommet-icons";
-import { ChangeEvent } from "react";
+
+import { colors, fontWeight } from "../theme";
 
 export type Option = {
-  id: number;
+  id: string;
   name: string;
 };
 
@@ -13,59 +15,94 @@ type Props = {
   name: string;
   options: Array<Option>;
   errors?: string;
-  value?: number;
+  value?: Option[] | Option;
   multiple?: boolean;
-  onChange: (value: number[] | number) => void;
+  onChange: (value: Option[] | Option) => void;
 };
 
-export const Dropdown = ({
-  label,
-  name,
-  options,
-  value,
-  errors = "",
-  multiple = false,
-  onChange,
-}: Props) => {
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (!multiple) {
-      onChange(Number(e.currentTarget.value));
-      return;
-    }
-
-    const values = Array.from(e.currentTarget.selectedOptions, (option) =>
-      Number(option.value)
+export const Dropdown = forwardRef(
+  (
+    {
+      label,
+      name,
+      options,
+      value,
+      errors = "",
+      multiple = false,
+      onChange,
+    }: Props,
+    ref: Ref<HTMLSelectElement>
+  ) => {
+    const [selectedOptions, setSelectedOptions] = useState<Option[] | Option>(
+      value ?? []
     );
-    onChange(values);
-  };
 
-  return (
-    <div>
+    useEffect(() => {
+      setSelectedOptions(value ?? []);
+    }, [value, options]);
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+      if (!multiple) {
+        const selected = options.find(
+          (option) => option.id.toString() === e.currentTarget.value
+        );
+
+        if (selected) {
+          setSelectedOptions(selected);
+          onChange(selected);
+        }
+        return;
+      }
+
+      const values = Array.from(
+        e.currentTarget.selectedOptions,
+        (option) => option.value
+      );
+
+      const selectedOptions = options
+        .filter((option) => values.includes(option.id.toString()))
+        .map((option) => ({ ...option, id: option.id.toString() }));
+
+      setSelectedOptions(selectedOptions);
+      onChange(selectedOptions);
+    };
+
+    return (
       <FormGroup>
         <Label htmlFor={name}>{label}:</Label>
         <Select
-          value={value}
-          onChange={(e) => handleChange(e)}
+          value={
+            multiple
+              ? ((selectedOptions as Option[]) ?? [])?.map(
+                  (option) => option.id
+                )
+              : (selectedOptions as Option).id
+          }
+          onChange={handleChange}
           multiple={multiple}
+          errors={errors !== ""}
+          ref={ref}
         >
           {options.map((option) => (
-            <option key={option.id} value={option.id}>
+            <option key={option.id} value={option.id.toString()}>
               {option.name}
             </option>
           ))}
         </Select>
+        {errors !== "" && (
+          <Error>
+            <ErrorIcon>
+              <Alert size="small" />
+            </ErrorIcon>
+            <ErrorMessage>{errors}</ErrorMessage>
+          </Error>
+        )}
       </FormGroup>
-      {errors !== "" && (
-        <Error>
-          <ErrorIcon>
-            <Alert size="small" />
-          </ErrorIcon>
-          <ErrorMessage>{errors}</ErrorMessage>
-        </Error>
-      )}
-    </div>
-  );
-};
+    );
+  }
+);
+
+Dropdown.displayName = "Dropdown";
 
 const FormGroup = styled.div({
   marginBottom: "0.2rem",
@@ -77,9 +114,13 @@ const Label = styled.label({
   fontSize: "1rem",
 });
 
-const Select = styled.select({
-  border: `1px solid ${colors.Black}`,
-  borderBottom: `2px solid ${colors.Black}`,
+type SelectProps = {
+  errors: boolean;
+};
+
+const Select = styled.select<SelectProps>(({ errors }) => ({
+  border: `1px solid ${errors ? colors.PersianRed : colors.Black}`,
+  borderBottom: `2px solid ${errors ? colors.PersianRed : colors.Black}`,
   borderRadius: 0,
   fontSize: "1rem",
   padding: "0.2rem",
@@ -87,7 +128,7 @@ const Select = styled.select({
   fontWeight: fontWeight.regular,
   color: colors.Black,
   background: colors.White,
-});
+}));
 
 const Error = styled.div({
   display: "flex",

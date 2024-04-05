@@ -7,7 +7,12 @@ import { Dropdown } from "../dropdown";
 import { Input } from "../input";
 import { colors } from "../theme/colors";
 
-const ENTRIES = [
+type Option = {
+  id: string;
+  name: string;
+};
+
+const ENTRIES: Array<Option> = [
   {
     id: "1",
     name: "10",
@@ -49,17 +54,19 @@ export const Table = <T extends BaseObject = BaseObject>({
   isLoading,
   onSelect,
 }: TableProps<T>) => {
-  const [page, setPage] = useState(1); // Pagina seleccionada.
-  const [entriesPerPage, setEntriesPerPage] = useState("1"); // Cantidad de entries a mostrar.
-  const [totalPage, setTotalPages] = useState(0); // Total de paginas.
+  const [page, setPage] = useState<number>(1); // Pagina seleccionada.
+  const [entriesPerPage, setEntriesPerPage] = useState<Array<Option>>([
+    ENTRIES[0],
+  ]); // Cantidad de entries a mostrar.
+  const [totalPage, setTotalPages] = useState<number>(0); // Total de paginas.
   const [content, setContent] = useState<Array<T>>([]); // Entries a mostrar.
-  const [showMessage, setShowMessage] = useState("");
+  const [showMessage, setShowMessage] = useState<string>("");
   const [filter, setFilter] = useState("");
 
   const tableStatus = useCallback(
     (data: Array<T>) => {
       const perPageSelected =
-        ENTRIES.find((e) => e.id === entriesPerPage) || ENTRIES[0];
+        ENTRIES.find((e) => e.id === entriesPerPage[0].id) || ENTRIES[0];
 
       let start = 0;
       let end = 0;
@@ -120,9 +127,10 @@ export const Table = <T extends BaseObject = BaseObject>({
           name="entries"
           label="Entries"
           options={ENTRIES}
-          onChange={setEntriesPerPage}
+          onChange={(e) => {
+            setEntriesPerPage([e as Option]);
+          }}
           value={entriesPerPage}
-          placeholder="Select your value here"
         />
         <Input
           label="Search"
