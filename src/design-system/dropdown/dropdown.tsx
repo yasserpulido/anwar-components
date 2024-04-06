@@ -6,20 +6,50 @@ import { Alert } from "grommet-icons";
 import { colors, fontWeight } from "../theme";
 
 export type Option = {
+  /**
+   * The id of the option
+   */
   id: string;
+  /**
+   * The name of the option
+   */
   name: string;
 };
 
 type Props = {
+  /**
+   * The label to display next to the dropdown
+   */
   label: string;
+  /**
+   * The name of the dropdown
+   */
   name: string;
+  /**
+   * The options to display in the dropdown
+   */
   options: Array<Option>;
+  /**
+   * The errors to display below the dropdown
+   */
   errors?: string;
+  /**
+   * The value of the dropdown
+   */
   value?: Option[] | Option;
+  /**
+   * Whether the dropdown allows multiple selections
+   */
   multiple?: boolean;
+  /**
+   *  The function to call when the dropdown is changed
+   */
   onChange: (value: Option[] | Option) => void;
 };
 
+/**
+ * A simple dropdown component
+ */
 export const Dropdown = forwardRef(
   (
     {
