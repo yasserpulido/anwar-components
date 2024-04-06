@@ -8,7 +8,13 @@ import { Input } from "../input";
 import { colors } from "../theme/colors";
 
 type Option = {
+  /**
+   * The id of the option.
+   */
   id: string;
+  /**
+   * The name of the option.
+   */
   name: string;
 };
 
@@ -32,22 +38,49 @@ const ENTRIES: Array<Option> = [
 ];
 
 type BaseObject = {
+  /**
+   * The id of the object.
+   */
   id: number;
+  /**
+   * The rest of the object.
+   */
   [key: string]: unknown;
 };
 
 export type ColumnProp<T = BaseObject> = {
+  /**
+   * The heading of the column.
+   */
   heading: string;
+  /**
+   * The value of the column.
+   */
   value: keyof T;
 };
 
 type TableProps<T = BaseObject> = {
+  /**
+   * The columns of the table.
+   */
   columns: Array<ColumnProp<T>>;
+  /**
+   * The data of the table.
+   */
   data: Array<T> | undefined;
+  /**
+   * The loading state of the table.
+   */
   isLoading: boolean;
+  /**
+   * The onSelect event of the table.
+   */
   onSelect: (element: T) => void;
 };
 
+/**
+ * The Table component is used to display a table with pagination.
+ */
 export const Table = <T extends BaseObject = BaseObject>({
   columns,
   data,

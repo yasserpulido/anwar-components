@@ -5,9 +5,15 @@ import styled from "@emotion/styled";
 import { colors } from "../theme";
 
 type Props = {
+  /**
+   * The content of the workshop.
+   */
   children: React.ReactNode;
 };
 
+/**
+ * Workshop is a container for the content of a workshop.
+ */
 const Workshop = ({ children }: Props) => {
   return <Container>{children}</Container>;
 };
