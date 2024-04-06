@@ -1,10 +1,19 @@
 import styled from "@emotion/styled";
 
 type Props = {
+  /**
+   * The text to display in the heading
+   */
   children: React.ReactNode;
+  /**
+   * The size of the heading
+   */
   size: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
+/**
+ * A simple heading component
+ */
 const Heading = ({ children, size }: Props) => {
   switch (size) {
     case "h1":

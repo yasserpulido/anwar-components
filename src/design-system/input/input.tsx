@@ -7,16 +7,43 @@ import { colors } from "../theme/colors";
 import { fontWeight } from "../theme";
 
 type Props = {
+  /**
+   * The label for the input
+   */
   label: string;
+  /**
+   * The name of the input
+   */
   name: string;
+  /**
+   * The value of the input
+   */
   value?: string | number;
+  /**
+   * The error message to display
+   */
   errors?: string;
+  /**
+   * The type of the input
+   */
   type?: "text" | "date" | "password" | "search" | "time";
+  /**
+   * The placeholder for the input
+   */
   placeholder?: string;
+  /**
+   * Whether the input is disabled
+   */
   disabled?: boolean;
+  /**
+   * The function to call when the input changes
+   */
   onChange: (value: string) => void;
 };
 
+/**
+ * A simple input component
+ */
 export const Input = ({
   label,
   name,
