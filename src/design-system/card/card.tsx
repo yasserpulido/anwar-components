@@ -3,10 +3,19 @@ import styled from "@emotion/styled";
 import { colors } from "../theme/colors";
 
 type Props = {
+  /**
+   * The content of the card
+   */
   children: React.ReactNode;
+  /**
+   * The title of the card
+   */
   title: string;
 };
 
+/**
+ * A simple card component
+ */
 const Card = ({ children, title }: Props) => {
   return (
     <Container>

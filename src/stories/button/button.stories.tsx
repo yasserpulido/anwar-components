@@ -50,9 +50,44 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     text: "Click me!",
     variant: "primary",
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    text: "Click me!",
+    variant: "danger",
+  },
+};
+
+export const Warning: Story = {
+  args: {
+    text: "Click me!",
+    variant: "warning",
+  },
+};
+
+export const Success: Story = {
+  args: {
+    text: "Click me!",
+    variant: "success",
+  },
+};
+
+export const Link: Story = {
+  args: {
+    text: "Click me!",
+    variant: "link",
+  },
+};
+
+export const LinkDanger: Story = {
+  args: {
+    text: "Click me!",
+    variant: "link-danger",
   },
 };
