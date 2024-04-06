@@ -7,13 +7,22 @@ import { maxWidth, mediaQuery } from "../theme";
 import { colors } from "../theme/colors";
 
 type AlertProps = {
+  /**
+   * The status of the alert
+   */
   status: {
     type: "success" | "error";
     text: string;
   };
+  /**
+   * Function to reset the alert
+   */
   reset: () => void;
 };
 
+/**
+ * Alert component to display success or error messages
+ */
 const Alert = ({ status, reset }: AlertProps) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
