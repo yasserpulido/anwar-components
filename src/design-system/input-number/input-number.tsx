@@ -7,20 +7,59 @@ import { colors } from "../theme/colors";
 import { fontWeight } from "../theme";
 
 type Props = {
+  /**
+   * The label for the input
+   */
   label: string;
+  /**
+   * The name of the input
+   */
   name: string;
+  /**
+   * The minimum value of the input
+   */
   min?: number;
+  /**
+   * The maximum value of the input
+   */
   max?: number;
+  /**
+   * The minimum length of the input
+   */
   minLength?: number;
+  /**
+   * The maximum length of the input
+   */
   maxLength?: number;
+  /**
+   * The step value of the input
+   */
   step?: number;
+  /**
+   * The value of the input
+   */
   value?: number;
+  /**
+   * The error message to display
+   */
   errors?: string;
+  /**
+   * The placeholder text
+   */
   placeholder?: string;
+  /**
+   * Make the input disabled
+   */
   disabled?: boolean;
+  /**
+   * The onChange event handler
+   */
   onChange: (value: string) => void;
 };
 
+/**
+ * A simple input number component
+ */
 export const InputNumber = forwardRef(
   (
     {
