@@ -2,27 +2,33 @@ import styled from "@emotion/styled";
 import { colors } from "../theme";
 
 type Props = {
+  /**
+   * The content of the timeline.
+   */
   children: React.ReactNode;
 };
 
+/**
+ * Timeline component.
+ */
 export const Timeline = ({ children }: Props) => {
   return <Container>{children}</Container>;
 };
 
-const Container = styled.div({
+const Container = styled.section({
   position: "relative",
   paddingLeft: "4rem",
 
-  "& > div": {
+  "& > article": {
     marginBottom: "1rem",
-    height: "200px",
+    minHeight: "200px",
   },
 
-  "& > div:last-child": {
+  "& > article:last-child": {
     marginBottom: 0,
   },
 
-  "> div::before": {
+  "> article::before": {
     content: '" "',
     backgroundColor: colors.White,
     border: `1px solid ${colors.DoveGrey}`,

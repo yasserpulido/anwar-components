@@ -1,18 +1,30 @@
+import { useEffect, useState } from "react";
+
 import styled from "@emotion/styled";
+import { Star as star, Favorite as favorite } from "grommet-icons";
 
 import { colors } from "../theme/colors";
 import { Anchor } from "../anchor";
-import { useEffect, useState } from "react";
 
-type Props = {
+type Media = {
+  id: number;
   title: string;
-  date: string;
+  year: number;
   description: string;
-  readMoreLink?: string;
+  rating: number;
+  favorite: boolean;
+  anchorPath?: string;
 };
 
-export const Item = ({ description, title, date, readMoreLink }: Props) => {
-  const [shortDescription, setShortDescription] = useState<string>("");
+type Props = {
+  media: Media;
+};
+
+export const Item = ({ media }: Props) => {
+  const { description, favorite, id, rating, title, year, anchorPath } = media;
+
+  const [shortDescription, setShortDescription] = useState<string>(description);
+  const stars = [];
 
   useEffect(() => {
     if (description.length > 200) {
@@ -21,37 +33,65 @@ export const Item = ({ description, title, date, readMoreLink }: Props) => {
     }
   }, [description]);
 
+  if (rating !== undefined && rating !== 0) {
+    for (let i = 0; i < rating; i++) {
+      stars.push(<Star key={`${i}-item-${id}`} color={colors.Salmon} />);
+    }
+    for (let i = rating; i < 5; i++) {
+      stars.push(<StarEmpty key={`${i}-item-${id}`} />);
+    }
+  }
+
   return (
     <Container>
       <Header>
-        <Title>{title}</Title>
-        <Date>{date}</Date>
+        <LeftSide>
+          <Title>{title}</Title>
+          <Date>{year.toString()}</Date>
+        </LeftSide>
+        {favorite && <Favorite />}
       </Header>
       <Description>{shortDescription}</Description>
-      {readMoreLink !== undefined && readMoreLink.length > 0 && (
-        <Footer>
-          <Anchor href={readMoreLink} text="Read more" />
-        </Footer>
-      )}
+      <Footer>
+        {stars && <div>{stars}</div>}
+        {anchorPath && <Anchor href={anchorPath} text="Read more" />}
+      </Footer>
     </Container>
   );
 };
 
-const Container = styled.div({
+const Container = styled.article({
   border: `1px solid ${colors.DoveGrey}`,
   padding: "1rem",
   display: "flex",
   flexDirection: "column",
+  justifyContent: "space-between",
   gap: "1rem",
+  boxShadow: "4px 4px 0px 0px rgb(0, 0, 0)",
 });
 
 const Header = styled.div({
   display: "flex",
-  flexDirection: "column",
-  marginBottom: "1rem",
+  justifyContent: "space-between",
+  alignItems: "center",
 });
 
-const Title = styled.span({
+const LeftSide = styled.div({
+  display: "flex",
+  flexDirection: "column",
+});
+
+const Favorite = styled(favorite)({
+  "path[fill='none']": {
+    fill: colors.Salmon,
+  },
+  "path[stroke='#000']": {
+    stroke: colors.Salmon,
+  },
+});
+
+const Title = styled.h2({
+  fontWeight: "bold",
   marginBottom: "0.5rem",
 });
 
@@ -66,5 +106,19 @@ const Description = styled.p({
 });
 
 const Footer = styled.div({
-  textAlign: "end",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
+const Star = styled(star)({
+  "path[fill-rule='evenodd']": {
+    fill: colors.ArylideYellow,
+  },
+});
+
+const StarEmpty = styled(star)({
+  "path[fill-rule='evenodd']": {
+    fill: colors.Mercury,
+  },
 });
