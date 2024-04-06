@@ -6,13 +6,22 @@ import { Add } from "grommet-icons";
 import { colors } from "../theme";
 
 type Props = {
+  /**
+   * The children of the panel
+   */
   children: React.ReactNode;
+  /**
+   * The title of the panel
+   */
   title: string;
 };
 
+/**
+ * The Panel component is used to display a panel with a title and content.
+ */
 const Panel = ({ children, title }: Props) => {
   const [panelIsOpen, setPanelIsOpen] = useState<boolean>(false);
-  
+
   return (
     <Container>
       <Header onClick={() => setPanelIsOpen(!panelIsOpen)}>

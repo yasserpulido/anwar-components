@@ -1,18 +1,46 @@
 import styled from "@emotion/styled";
 import { Alert } from "grommet-icons";
+
 import { colors, fontWeight } from "../theme";
 
 type Props = {
+  /**
+   * The label of the textfield
+   */
   label: string;
+  /**
+   * The name of the textfield
+   */
   name: string;
+  /**
+   * The number of rows for the textfield
+   */
   rows?: number;
+  /**
+   * The value of the textfield
+   */
   value?: string | number;
+  /**
+   * The errors of the textfield
+   */
   errors?: string;
+  /**
+   * The placeholder of the textfield
+   */
   placeholder?: string;
+  /**
+   * The disabled state of the textfield
+   */
   disabled?: boolean;
+  /**
+   * The onChange event of the textfield
+   */
   onChange: (value: string) => void;
 };
 
+/**
+ * The Textfield component is used to display a textfield with a label and errors.
+ */
 export const Textfield = ({
   label,
   name,

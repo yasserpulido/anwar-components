@@ -5,11 +5,23 @@ import styled from "@emotion/styled";
 import { Heading } from "../heading";
 
 type Props = {
+  /**
+   * The header of the modal
+   */
   header: string;
+  /**
+   * The content of the modal
+   */
   content: ReactNode;
+  /**
+   * The children of the modal
+   */
   children: ReactNode;
 };
 
+/**
+ * The Modal component is used to display a modal dialog box.
+ */
 const Modal = ({ header, content, children }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
