@@ -1,1 +1,62 @@
-"# anwar-components" 
+## Anwar Components
+
+This is a collection of components that I have created for my personal projects. I have decided to share them with the community. I hope you find them useful.
+
+## Download
+
+- [anwar-components](https://www.npmjs.com/package/anwar-components)
+
+## Installation
+
+```bash
+npm install anwar-components
+```
+
+## Usage
+
+```jsx
+import React from 'react';
+import { Button } from 'anwar-components';
+
+const App = () => {
+  return <Button text="Click me" />;
+};
+
+export default App;
+```
+
+## Website that uses this library
+
+- [Cinema Memory](https://www.cinemamemory.com/)
+
+## Storybook
+
+- [Anwar Components](https://yasserpulido.github.io/anwar-components/)
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2024 Yasser Pulido
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Author
+
+- [Yasser Pulido](https://yasserpulido.com/)
